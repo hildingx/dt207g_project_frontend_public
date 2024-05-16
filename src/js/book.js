@@ -1,30 +1,53 @@
-document.getElementById('bookingForm').addEventListener('submit', async function(event) {
-    event.preventDefault();
+//Händelsehanterarfunktion för boka bord
+document.addEventListener('DOMContentLoaded', () => {
+    //Hämta formulär och modaler
+    const form = document.getElementById('bookingForm');
+    const bookingModal = document.getElementById("bookingModal");
+    const confirmationModal = document.getElementById("confirmationModal");
 
-    //Skapa ett objekt med bokningsdata från formuläret
-    const booking = {
-        name: sanitizeInput(document.getElementById('name').value),
-        date: document.getElementById('date').value,
-        time: document.getElementById('time').value,
-        numberOfPeople: parseInt(document.getElementById('numberOfPeople').value, 10),
-        specialRequests: sanitizeInput(document.getElementById('specialRequests').value)
-    };
+    //Element för att visa felmeddelanden
+    const submitError = document.getElementById('submitError');
 
-    try {
-        const response = await bookTable(booking);
-        if (response.message && !response.error) {
-            alert('Bokning lyckades: ' + response.message);
-        } else {
-            alert('Bokning misslyckades: ' + (response.error || 'Okänt fel'));
+    //Vid submit körs funktion
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        //Skapa bokningsobjekt från data från formulär
+        const booking = {
+            name: sanitizeInput(document.getElementById('name').value),
+            date: document.getElementById('date').value,
+            time: document.getElementById('time').value,
+            numberOfPeople: parseInt(document.getElementById('numberOfPeople').value, 10),
+            specialRequests: sanitizeInput(document.getElementById('specialRequests').value)
+        };
+
+        //Kontroll om namn och önskemål är ifyllda
+        if (!booking.name || !booking.specialRequests ) {
+            submitError.innerHTML = '<i class="fas fa-exclamation-circle"></i> Vänligen fyll i alla fält';
+            return;
         }
-    } catch (error) {
-        console.error('Bokning misslyckades:', error);
-        alert('Ett fel uppstod. Försök igen senare.');
-    }
+
+        //Posta bokningsobjekt till API
+        try {
+            const response = await bookTable(booking);
+
+            if (response.message && !response.error) {
+                bookingModal.style.display = "none"; 
+                confirmationModal.style.display = "block"; 
+            } else {
+                alert('Bokning misslyckades: ' + (response.error || 'Okänt fel'));
+            }
+        } catch (error) {
+            alert('Ett fel uppstod. Försök igen senare.');
+        }
+        form.reset();
+    });
 });
 
+//Funktion för att lägga bokning
 async function bookTable(booking) {
     try {
+        //Post-metod till backend med bokningsdata
         const response = await fetch(`https://dt207g-project-backend.onrender.com/api/customerbooking`, {
             method: 'POST',
             headers: {

@@ -1,3 +1,4 @@
+//Funktion för att hämta meny från backend databas
 async function fetchMenu() {
     try {
         const response = await fetch(`https://dt207g-project-backend.onrender.com/api/customermenu`);
@@ -8,6 +9,7 @@ async function fetchMenu() {
     }
 }
 
+//Funktion för att hämta meny och skriva ut i DOM
 async function displayMenu() {
     try {
         const data = await fetchMenu();
@@ -27,11 +29,11 @@ async function displayMenu() {
         data.forEach(menu => {
             const menuItem = document.createElement("li");
             menuItem.innerHTML = `
-                <p><strong>Namn:</strong> ${menu.name}</p>
-                <p><strong>Pris:</strong> ${menu.price}kr</p>
-                <p><strong>Beskrivning:</strong> ${menu.description}</p>
+                <p><strong>${menu.name}</strong> <span class="price">${menu.price}kr</span></p>
+                <p class="description">${menu.description}</p>
             `;
 
+            //Lägger menyobjekt i rätt kategori
             if (menu.category === "starter") {
                 starterList.appendChild(menuItem);
             } else if (menu.category === "main course") {

@@ -1,10 +1,9 @@
 {
   "name": "dt207g_project_frontend_public",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
-    "start": "parcel serve ./src/index.html ./src/about.html ./src/book.html",
-    "build": "parcel build ./src/index.html ./src/about.html ./src/book.html"
+    "start": "parcel serve ./src/index.html",
+    "build": "parcel build ./src/index.html"
   },
   "keywords": [],
   "author": "",
@@ -12,5 +11,8 @@
   "description": "",
   "dependencies": {
     "parcel": "^2.12.0"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.12.0"
   }
 }

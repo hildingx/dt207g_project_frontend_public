@@ -3,37 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Restaurang Nomads</title>
     <script type="module" src="js/displayMenu.js"></script>
+    <script type="module" src="js/bookModal.js"></script>
+    <script type="module" src="js/book.js"></script>
+    <link rel="stylesheet" href="css/main.scss">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" href="img/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="img/favicon-32x32.png" sizes="32x32" type="image/png">
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="index.html" class="current">Startsida</a></li>
-                <li><a href="about.html">Om</a></li>
-                <li><a href="book.html">Boka bord</a></li>
+                <li><a href="#menu">Meny</a></li>
+                <li><a href="#" id="openModalLink">Boka bord</a></li>
+                <li><a href="#contact">Kontakt</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <div id="menu">
+        <!-- Dold bokningsmodal -->
+        <div id="bookingModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h1>Boka bord</h1>
+                <form id="bookingForm">
+                    <label for="name">Namn:</label><br>
+                    <input type="text" id="name" name="name" required><br><br>
+
+                    <label for="date">Datum:</label><br>
+                    <input type="date" id="date" name="date" required><br><br>
+
+                    <label for="time">Tid:</label><br>
+                    <input type="time" id="time" name="time" required><br><br>
+
+                    <label for="numberOfPeople">Antal personer:</label><br>
+                    <select id="numberOfPeople" name="numberOfPeople" required>
+                        <option value="">Välj antal</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                    </select><br><br>
+
+                    <label for="specialRequests">Särskilda önskemål:</label><br>
+                    <textarea id="specialRequests" name="specialRequests"></textarea><br><br>
+                    <div id="submitError"></div>
+
+                    <button type="submit"><i class="fas fa-arrow-right"></i> Boka</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Dold bekräftelsemodal-->
+        <div id="confirmationModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeConfirmation">&times;</span>
+                <h1>Bokning bekräftad</h1>
+                <p>Din bokning har bekräftats. <br> Vi ser fram emot ditt besök!</p>
+            </div>
+        </div>
+
+        <section id="infoText">
+            <h1>Välkommen till <br>Restaurang Nomads</h1>
+            <p>
+                Nomads är en restaurang och mötesplats där vi, med stor entusiasm, strävar efter att introducera och välkomna dig till det klassiska köket. 
+                På Nomads handlar allt om att utforska och njuta av enkelt men god mat som vår jord har att erbjuda. Vår resa började som en liten mat- och kulturhubb 
+                för matfrälsta själar för nästan 90 år sedan, inspirerade av vår passion för att förfina klassiska recept.
+                <br><br>
+                Här i Sundsvall på Storgatan 45, kan du förvänta dig en varm och inbjudande atmosfär där varje besök blir en fullträff med klassisk mat.
+                Nomads har genom åren anpassat sig och förändrats, men vår kärna - kärleken till mat och kultur - förblir oförändrad. 
+                <br><br>
+                Vad framtiden har att ge vet vi inte ännu; vi följer bara vår passion och välkomnar dig att dela den med oss.
+                <br><br>
+                Nomads Team
+            </p>
+        </section>
+        <div class="section-divider"></div>
+        <section id="menu">
+            <h2>Meny</h2>
+            <h3>Förrätter</h3>
             <div id="starters">
                 <ul></ul>
             </div>
+            <span class="menu-line"></span>
+            <h3>Huvudrätter</h3>
             <div id="mainCourses">
                 <ul></ul>
             </div>
+            <span class="menu-line"></span>
+            <h3>Efterrätter</h3>
             <div id="desserts">
                 <ul></ul>
             </div>
+            <span class="menu-line"></span>
+            <h3>Dryck</h3>
             <div id="drinks">
                 <ul></ul>
             </div>
-        </div>
+        </section>
     </main>
     <footer>
-
+        <section id="contact">
+            <h2>Kontakt</h2>
+            <div class="contact-container">
+                <a href="#" class="contact-box">
+                    <i class="fas fa-phone-alt"></i>
+                    <p>+46 123 456 789</p>
+                </a>
+                <a href="#" class="contact-box">
+                    <i class="fas fa-envelope"></i>
+                    <p>info@nomads.com</p>
+                </a>
+                <a href="#" class="contact-box" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                    <p>Facebook</p>
+                </a>
+                <a href="#" class="contact-box" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                    <p>Instagram</p>
+                </a>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-info">
+                <p class="address">Storgatan 45 <br> 852 30 Sundsvall <br> Sverige</p>
+                <p class="brand">Nomads</p>
+            </div>
+        </section>
     </footer>
 </body>
 </html>
