@@ -21,9 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
             specialRequests: sanitizeInput(document.getElementById('specialRequests').value)
         };
 
-        //Kontroll om namn och önskemål är ifyllda
-        if (!booking.name || !booking.specialRequests ) {
-            submitError.innerHTML = '<i class="fas fa-exclamation-circle"></i> Vänligen fyll i alla fält';
+        //Kontroll att namn är ifyllt
+        if (!booking.name ) {
+            submitError.innerHTML = '<i class="fas fa-exclamation-circle"></i> Vänligen fyll i ditt namn';
             return;
         }
 
