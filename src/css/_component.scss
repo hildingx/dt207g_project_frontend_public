@@ -16,25 +16,74 @@
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-    max-width: 300px;
-    border-radius: 5px;
+    max-width: 400px;
+    border-radius: 10px;
     position: relative;
     z-index: 5;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+    h2 {
+        text-align: center;
+        color: #333;
+        font-family: 'Arial', sans-serif;
 
-    button {
-        margin: 2px auto;
-        padding: 5px;
-        width: 40%;
-        max-width: 200px;
-        border: 1px solid #969696;
-        border-radius: 5px;
-        background-color:#ddd;
-        font-size: 1em;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        
-        &:hover {
-            background-color: #ccc;
+        i {
+            margin-right: 10px;
+            color: #28a745;
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input, select, textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            width: 100%;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+            &:focus {
+                border-color: #007bff;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+                outline: none;
+            }
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            margin: 2px auto;
+            padding: 10px;
+            width: 50%;
+            max-width: 200px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: #0056b3;
+            }
+
+            i {
+                margin-right: 5px;
+            }
         }
     }
 }
@@ -48,13 +97,17 @@
     right: 20px;
     top: 10px;
     cursor: pointer;
+
+    &:hover,
+    &:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
 }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+#confirmationModal {
+    text-align: center;
 }
 
 #openModalLink {
